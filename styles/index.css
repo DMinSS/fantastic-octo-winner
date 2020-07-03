@@ -1,0 +1,32 @@
+section > p {
+    color: brown;
+}
+
+a + p {
+    font-family: 'Oxygen', sans-serif;
+}
+
+.container #hello {
+    color: green;
+}
+
+.container {
+    color: blue;
+}
+
+#hello {
+    color: red;
+}
+
+div > p {
+    color: yellow;
+}
+
+ol > li {
+    display: inline;
+}
+
+p.inherit { 
+    color: green;
+    border: medium solid;
+}

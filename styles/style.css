@@ -1,0 +1,41 @@
+/* @font-face {
+    font-family: 'Tangerine';
+    src: url('font1.woff2');
+} */
+
+header {
+    font-family: 'Tangerine', serif;
+    font-size: 24px;
+    max-width: 1000px;
+    min-width: 500px;
+    height: 150px;
+    background-color: green;
+    margin: 0 auto;
+}
+
+section {
+    max-width: 1000px;
+    min-width: 500px;
+    margin: 0 auto;
+}
+
+nav {
+    float: left;
+    background-color: red;
+    width: 200px;
+    height: 450px;
+}
+
+article {
+    height: 450px;
+    background-color: blue;
+    overflow: scroll;
+}
+
+footer {
+    max-width: 1000px;
+    min-width: 500px;
+    margin: 0 auto;
+    height: 100px;
+    background-color: gray;
+}

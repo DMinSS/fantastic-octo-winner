@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Flexible Child Box</title>
+        <style>
+            .container {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-around;
+                height: 500px;
+                outline: 2px solid silver;
+            }
+            .box1,.box2,.box3,.box4 {
+                /* flex: 1 auto;  */
+                color: white;
+                background: tomato;
+                max-width: 100px;
+                outline: 1px solid black;
+                box-shadow: 10px 10px 3px gray;
+            }
+            .box1 {
+                order: 3;
+                align-self: center;
+            }
+            .box2 {
+                order: 4;
+            }
+            .box3 {
+                order: 2;
+                align-self: flex-start;
+            }
+            .box4 {
+                order: 1;
+                align-self: flex-end;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <p class="box1">This is the child 1</p>
+            <p class="box2">This is the child 2</p>
+            <p class="box3">This is the child 3</p>
+            <p class="box4">This is the child 4</p>
+            <!-- <div class="box box5">
+                <p>This is the subchild 1</p>
+                <p>This is the subchild 2</p>
+            </div> -->
+        </div>
+    </body>
+</html>
+
