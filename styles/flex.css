@@ -1,0 +1,40 @@
+.main-container {
+    display: flex;
+    background: #ce8888;
+}
+
+.container {
+    flex-basis: 50%;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+    font-size: x-large;
+    padding: 10px;
+}
+
+.menu-container {
+    display: flex;
+    justify-content: flex-end;
+    height: 60px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 50%;
+}
+
+.menu-container .menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: bisque;
+    cursor: pointer;
+    padding: 4px 10px;
+}
+
+.menu-container .menu:active, .menu-container .menu:hover {
+    background: repeating-linear-gradient(45deg, #824e4e, transparent 100px);
+}
