@@ -24,7 +24,7 @@ showHello();
 
 var a = 10;
 
-var test = function() {
+var test = function () {
     a = 30;
     var b = 40;
 }
@@ -94,15 +94,15 @@ console.log(arr.join("^"));
 var myString = "I Love JavaScript";
 console.log(myString.split(""));
 console.log(myString.split("").sort());
-console.log(arr.sort(function(a, b) {
+console.log(arr.sort(function (a, b) {
     return a - b;
 }));
 
 for (let i = 0; i < arr.length; i++) {
-    console.log(arr[i]);  
+    console.log(arr[i]);
 }
 
-arr.forEach(function(element, index) {
+arr.forEach(function (element, index) {
     console.log("element " + element + " is at index: " + index);
 });
 
@@ -114,7 +114,7 @@ var dic = {
 
 console.log(dic["key2"]);
 
-for(k in dic) {
+for (k in dic) {
     console.log(dic[k]);
 }
 
@@ -123,7 +123,7 @@ for(k in dic) {
 function Cat(name, color) {
     this.name = name;
     this.color = color;
-    this.run = function() {
+    this.run = function () {
         console.log(this.name + " runs!");
     };
     return this;
@@ -137,16 +137,80 @@ snizhok.run();
 // ----------
 // Actions
 
-jsbtn.onclick = showHello;
+jsbtn.onclick = function() {
+    // step 1
+var xhr = new XMLHttpRequest();
 
-helloCont.addEventListener("click", function(e) {
-    console.log("hello container clicked");
+// step 2
+xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+        hello.innerHTML = JSON.parse(xhr.responseText).value;
+    } 
+}
+
+xhr.open('GET', 'https://api.chucknorris.io/jokes/random');
+
+// step 3
+xhr.send();
+};
+
+helloCont.addEventListener("click", function (e) {
+    // fetch API
+    fetch('https://api.chucknorris.io/jokes/random')
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(json) {
+        hello.innerHTML = json.value;
+    })
+    .catch(function(err) {
+        console.log(err);
+    });
+    // end of fetch API
     e.stopPropagation();
 }, true);
-hello.addEventListener("click", function(e) {
+hello.addEventListener("click", function (e) {
     console.log("hello clicked");
     console.log(e);
 }, true);
 
 // hello.addEventListener('click', showHello, false);
 // hello.removeEventListener('click', showHello);
+
+// AJAX
+
+btnsend.addEventListener('click', function() {
+    fetch('https://formspree.io/YOUR_EMAIL@HERE', {
+        method: 'POST',
+        body: JSON.stringify(
+            {
+                email: feedback.email.value,
+                message: feedback.message.value
+                }
+        ),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(function(response) {
+        console.log(response.status);
+    });
+})
+
+
+// WEATHER
+var prefix = 'https://cors-anywhere.herokuapp.com/'
+var city = 'kiev';
+fetch(prefix + 'https://www.metaweather.com/api/location/search/?query=' + city)
+.then(function(response) {
+    return response.json();
+})
+.then(function(json) {
+    return fetch(prefix + 'https://www.metaweather.com/api/location/' + json[0].woeid + '/');
+})
+.then(function(response) {
+    return response.json();
+})
+.then(function(json) {
+    document.querySelector('#weather img').src = 'https://www.metaweather.com/static/img/weather/png/64/' + json.consolidated_weather[0].weather_state_abbr +'.png';
+    document.querySelector('#weather b').innerHTML = json.consolidated_weather[0].the_temp;
+});
