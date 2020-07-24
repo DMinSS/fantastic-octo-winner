@@ -1,6 +1,8 @@
-var test1 = 10;
+"use_strict";
 
-var z = true;
+let test1 = 10;
+
+const z = true;
 
 var str = "Hello JavaScript!";
 var str1 = 'Hello #2';
@@ -24,7 +26,7 @@ showHello();
 
 var a = 10;
 
-var test = function () {
+var test = () => {
     a = 30;
     var b = 40;
 }
@@ -102,7 +104,7 @@ for (let i = 0; i < arr.length; i++) {
     console.log(arr[i]);
 }
 
-arr.forEach(function (element, index) {
+arr.forEach((element, index) => {
     console.log("element " + element + " is at index: " + index);
 });
 
@@ -129,47 +131,46 @@ function Cat(name, color) {
     return this;
 }
 
-var murzik = new Cat("Murzik", "white");
-var snizhok = new Cat("Snizhok", "black");
+let murzik = new Cat("Murzik", "white");
+let snizhok = new Cat("Snizhok", "black");
+murzik = new Cat("Barsik", 'red');
 murzik.run();
 snizhok.run();
 
 // ----------
 // Actions
 
-jsbtn.onclick = function() {
+jsbtn.onclick = function () {
     // step 1
-var xhr = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest();
 
-// step 2
-xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-        hello.innerHTML = JSON.parse(xhr.responseText).value;
-    } 
-}
+    // step 2
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            hello.innerHTML = JSON.parse(xhr.responseText).value;
+        }
+    }
 
-xhr.open('GET', 'https://api.chucknorris.io/jokes/random');
+    xhr.open('GET', 'https://api.chucknorris.io/jokes/random');
 
-// step 3
-xhr.send();
+    // step 3
+    xhr.send();
 };
 
-helloCont.addEventListener("click", function (e) {
+helloCont.addEventListener("click", (e) => {
     // fetch API
     fetch('https://api.chucknorris.io/jokes/random')
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(json) {
-        hello.innerHTML = json.value;
-    })
-    .catch(function(err) {
-        console.log(err);
-    });
+        .then((response) => response.json())
+        .then((json) => {
+            hello.innerHTML = json.value;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
     // end of fetch API
     e.stopPropagation();
 }, true);
-hello.addEventListener("click", function (e) {
+hello.addEventListener("click", (e) => {
     console.log("hello clicked");
     console.log(e);
 }, true);
@@ -179,38 +180,149 @@ hello.addEventListener("click", function (e) {
 
 // AJAX
 
-btnsend.addEventListener('click', function() {
+btnsend.addEventListener('click', function () {
     fetch('https://formspree.io/YOUR_EMAIL@HERE', {
         method: 'POST',
         body: JSON.stringify(
             {
                 email: feedback.email.value,
                 message: feedback.message.value
-                }
+            }
         ),
         headers: {
             'Content-Type': 'application/json'
         }
-    }).then(function(response) {
+    }).then(function (response) {
         console.log(response.status);
     });
 })
 
 
 // WEATHER
-var prefix = 'https://cors-anywhere.herokuapp.com/'
-var city = 'kiev';
-fetch(prefix + 'https://www.metaweather.com/api/location/search/?query=' + city)
-.then(function(response) {
-    return response.json();
-})
-.then(function(json) {
-    return fetch(prefix + 'https://www.metaweather.com/api/location/' + json[0].woeid + '/');
-})
-.then(function(response) {
-    return response.json();
-})
-.then(function(json) {
-    document.querySelector('#weather img').src = 'https://www.metaweather.com/static/img/weather/png/64/' + json.consolidated_weather[0].weather_state_abbr +'.png';
-    document.querySelector('#weather b').innerHTML = json.consolidated_weather[0].the_temp;
+const prefix = 'https://cors-anywhere.herokuapp.com/'
+const city = 'kiev';
+fetch(`${prefix}https://www.metaweather.com/api/location/search/?query=${city}`)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (json) {
+        return fetch(`${prefix}https://www.metaweather.com/api/location/${json[0].woeid}/`);
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (json) {
+        document.querySelector('#weather img').src = 'https://www.metaweather.com/static/img/weather/png/64/' + json.consolidated_weather[0].weather_state_abbr + '.png';
+        document.querySelector('#weather b').innerHTML = json.consolidated_weather[0].the_temp;
+    });
+
+
+// function Person(age) {
+//     this.age = age;
+//     setInterval(() => { 
+//         this.age++;
+//         console.log(this.age);
+//     }, 1000);
+// }
+// var p = new Person(25);
+const name = "Vasya";
+const someString = `<p>Hello, ${name}</p>
+<p>Goodbye</p>`;
+hello.innerHTML = someString;
+
+const obj = {first: 'John', last: 'Smith', pobatkovi: "Andriovich"};
+// var first = obj['first'];
+// var last = obj['last'];
+let {first, last} = obj;
+console.log(first);
+
+const {first: l} = obj;
+console.log(l);
+
+
+let h = 1;
+let g = 3;
+[h, g] = [g, h];
+console.log(h);
+console.log(g);
+
+function f() {
+    return [5, 6];
+}
+
+let n,m;
+[n, m] = f();
+console.log(n);
+console.log(m);
+
+let {pobatkovi = "Petrovich"} = obj;
+console.log(pobatkovi);
+
+class Dog {
+    constructor(name, color) {
+        this.name = name;
+        this.color = color;
+    }
+
+    run() {
+        console.log(this.name + " runs!");
+    }
+}
+
+class GuardDog extends Dog {
+    constructor(name, color, runSpeed) {
+        super(name, color);
+        this.runSpeed = runSpeed;
+    }
+
+    guard() {
+        console.log(`I will run at ${this.runSpeed} km/s and bite you!`);
+    }
+}
+
+const dog = new Dog("Rex", "black");
+dog.run();
+
+const gDog = new GuardDog("Jack", 'white', 30);
+gDog.run();
+gDog.guard();
+
+const prom = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        const number = Math.random() * 100;
+        if (number > 99) {
+            reject("big number");
+        } else {
+            resolve(number);
+        }
+    }, 3000);
 });
+
+async function myCoolAsync() {
+    return prom;
+}
+
+prom.then((res) => {
+    return res * 2;
+}).then((otherRes) => {
+    console.log(otherRes);
+}).catch(err => {
+    alert('i fixed the error: ' + err);
+    return err;
+}).finally(text => {
+    console.log(text);
+});
+
+const myTestFun = async () => {
+    const z = await myCoolAsync();
+    alert(z * 2);
+};
+
+(async function main() {
+    myTestFun();
+})();
+
+
+async function megaFetch() {
+    const res = await fetch('https://google.com/');
+}
