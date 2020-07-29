@@ -3,6 +3,8 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const app = express();
 
+const PORT = process.env.PORT || 3000;
+
 app.use(bodyparser.urlencoded({extended: false}));
 
 app.use(bodyparser.json());
@@ -23,4 +25,4 @@ app.post('/form', (req, res, next) => {
     res.redirect('/');
 })
 
-app.listen(3000);
+app.listen(PORT);
